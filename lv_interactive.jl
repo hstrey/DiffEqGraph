@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.17
+# v0.12.20
 
 using Markdown
 using InteractiveUtils
@@ -18,6 +18,15 @@ using DifferentialEquations
 
 # ╔═╡ 810e594c-3f21-11eb-331b-ef943eab7fba
 using Plots
+
+# ╔═╡ b55e8366-6fcd-11eb-11fd-77cc5e771425
+import Pkg
+
+# ╔═╡ abc02e66-6fd4-11eb-1c30-d121ede93969
+Pkg.add("DifferentialEquations")
+
+# ╔═╡ c89acb38-6fcd-11eb-3c3a-41c496b74d7e
+Pkg.add("Plots")
 
 # ╔═╡ 89659ab0-3f21-11eb-0eda-e99c5647e6f6
 function lotka_volterra(du,u,p,t)
@@ -61,7 +70,10 @@ md"alpha $alpha, beta $beta, delta $delta gamma $gamma"
 plot(sol)
 
 # ╔═╡ Cell order:
+# ╠═b55e8366-6fcd-11eb-11fd-77cc5e771425
+# ╠═abc02e66-6fd4-11eb-1c30-d121ede93969
 # ╠═b10b8954-3f20-11eb-0b6b-69b77f96f60c
+# ╠═c89acb38-6fcd-11eb-3c3a-41c496b74d7e
 # ╠═810e594c-3f21-11eb-331b-ef943eab7fba
 # ╠═89659ab0-3f21-11eb-0eda-e99c5647e6f6
 # ╠═fa33bece-3f22-11eb-2670-9fa1678c1504
