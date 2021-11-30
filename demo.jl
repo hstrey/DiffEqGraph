@@ -76,7 +76,7 @@ sol = solve(prob)
 md"alpha $alpha, beta $beta, delta $delta gamma $gamma"
 
 # ╔═╡ 044dd4fe-3f22-11eb-2b11-8bbb13cc851b
-plot(sol,size=(3000,2000),linewidth=4)
+plot(sol,size=(3000,2000),thickness_scaling = 4)
 
 # ╔═╡ e4e37a7a-75e9-11eb-2cbd-fb18edac47d5
 md"""
@@ -93,7 +93,7 @@ begin
 g = [1 1;
      1 1]
 
-graphplot(DiGraph(g), self_edge_size=0.2,nodeshape=:circle,names=["x","y"])
+graphplot(DiGraph(g), self_edge_size=0.15,nodeshape=:circle,names=["x","y"],size=(3000,2000),nodesize=1,thickness_scaling = 10)
 end
 
 # ╔═╡ 71aec586-75ef-11eb-1e2a-2d1921b0b80b
@@ -222,17 +222,17 @@ plot(sol2)
 
 # ╔═╡ Cell order:
 # ╠═b55e8366-6fcd-11eb-11fd-77cc5e771425
-# ╠═a2d4cc0a-75ea-11eb-02dc-53ffb118bfec
+# ╟─a2d4cc0a-75ea-11eb-02dc-53ffb118bfec
 # ╠═89659ab0-3f21-11eb-0eda-e99c5647e6f6
 # ╠═fa33bece-3f22-11eb-2670-9fa1678c1504
 # ╠═13b2b436-3f23-11eb-1059-9310363dceeb
 # ╠═13b2eed8-3f23-11eb-2401-bd8e645e10bb
 # ╠═13b3466c-3f23-11eb-33b5-6b885f523bcb
 # ╠═f2a32786-3f21-11eb-1a6f-1d3939e83184
-# ╠═103757ea-3f22-11eb-0d50-f1434cabf86d
-# ╠═26b0c852-3f23-11eb-2d57-1da8f1831517
-# ╠═52e96334-3f23-11eb-3b16-0bab6a008978
-# ╠═7e08dc2a-3f23-11eb-11f3-6fab607a18c9
+# ╟─103757ea-3f22-11eb-0d50-f1434cabf86d
+# ╟─26b0c852-3f23-11eb-2d57-1da8f1831517
+# ╟─52e96334-3f23-11eb-3b16-0bab6a008978
+# ╟─7e08dc2a-3f23-11eb-11f3-6fab607a18c9
 # ╟─9c69556e-3f23-11eb-1f68-51527dd554e9
 # ╠═044dd4fe-3f22-11eb-2b11-8bbb13cc851b
 # ╠═e4e37a7a-75e9-11eb-2cbd-fb18edac47d5

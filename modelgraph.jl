@@ -1,41 +1,11 @@
-### A Pluto.jl notebook ###
-# v0.12.21
-
-using Markdown
-using InteractiveUtils
-
-# ╔═╡ bc5b20e0-7de5-11eb-1cf0-8d1c48956180
-begin
-	import Pkg
-	Pkg.activate(".")
-	Pkg.add(["DifferentialEquations", "Plots", 			          "PlutoUI","GraphPlot","LightGraphs","GraphRecipes",
-			"Markdown","SimpleWeightedGraphs","ModelingToolkit"])
-
-	using DifferentialEquations
-	using PlutoUI
-	using Plots
-	using GraphPlot
-	using LightGraphs
-	using GraphRecipes
-	using Markdown
-	using SimpleWeightedGraphs
-	using ModelingToolkit
-	using SparseArrays
-end
-
-# ╔═╡ e7057d90-7de5-11eb-3552-879f6b025983
-begin
-	graph = SimpleWeightedDiGraph(2)
-	e1 = SimpleWeightedEdge(1, 2, 1)
-	e2 = SimpleWeightedEdge(2, 1, 4)
-	add_edge!(graph, e1)
-	add_edge!(graph, e2)
-	graphplot(graph,curvature_scalar=0.1,arrow=true)
-end
-
-# ╔═╡ 3830b28e-7de6-11eb-1851-8be0f8abb0d1
-begin
-# define the connectome graph
+using DifferentialEquations
+using Plots
+using GraphPlot
+using LightGraphs
+using GraphRecipes
+using SimpleWeightedGraphs
+using ModelingToolkit
+using SparseArrays
 
 tng = SimpleWeightedDiGraph(4)
 
@@ -58,12 +28,7 @@ for (ventral, dorsal, Dgap) in zip(2:2, 4:4, Dgaps)
     LightGraphs.add_edge!(tng, e1)
     LightGraphs.add_edge!(tng, e2)
 end
-	graphplot(tng, names=1:4, curvature_scalar=0.1,arrow=true)
-end
-
-# ╔═╡ ad8d8140-7ded-11eb-1ddd-abad58c0ec28
-begin
-# define the unit equation
+graphplot(tng, names=1:4, curvature_scalar=0.1,arrow=true)
 
 @parameters t g e b
 
@@ -78,10 +43,6 @@ fhn = [
     D(w) ~ e * (v - g * w + b)
 ]
 
-end
-
-# ╔═╡ bfc7c8ba-7df3-11eb-388b-5bc57d8b13b9
-begin
 function couple(system_to, systems_from, weights)
     return [0 ~ system_to.F +  sum(weights .* getproperty.(systems_from, :v))]
 end
@@ -98,12 +59,6 @@ systems = [
     )
     for i in vertices(tng)
 ]
-end
-
-# ╔═╡ 9a69bc72-7df3-11eb-0bec-ff1b641a8b5a
-begin
-# populate couplings from edge
-
 couplings = Equation[]
 
 edgs = edges(tng)
@@ -160,7 +115,7 @@ end
 # Construct the parameters, which are the same across
 # all systems in this case
 
-p0 = Pair{Any, Float64}[]
+p0 = Pair{Any,Float64}[]
 
 for sys in systems
     append!(
@@ -172,21 +127,8 @@ for sys in systems
         ]
     )
 end
-end
 
-# ╔═╡ bd69611a-7ded-11eb-2c74-2d05e6f0eb62
-begin
-	prob = ODEProblem(connected, u0, (0.0, 2000.0), p0)
-	sol = solve(prob, Rodas5())
+prob = ODEProblem(connected, u0, (0.0, 2000.0), p0)
+sol = solve(prob, Rodas5())
 
-	plot(sol; vars = collect(1:3:12))
-end
-
-# ╔═╡ Cell order:
-# ╠═bc5b20e0-7de5-11eb-1cf0-8d1c48956180
-# ╠═e7057d90-7de5-11eb-3552-879f6b025983
-# ╠═3830b28e-7de6-11eb-1851-8be0f8abb0d1
-# ╠═ad8d8140-7ded-11eb-1ddd-abad58c0ec28
-# ╠═bfc7c8ba-7df3-11eb-388b-5bc57d8b13b9
-# ╠═9a69bc72-7df3-11eb-0bec-ff1b641a8b5a
-# ╠═bd69611a-7ded-11eb-2c74-2d05e6f0eb62
+plot(sol; vars = collect(1:3:12))
